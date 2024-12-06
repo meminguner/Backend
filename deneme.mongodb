@@ -1,0 +1,66 @@
+const database = 'mekanbul';
+const collection = 'mekanlar';
+ 
+use(database);
+
+db.createCollection(collection);
+
+db.venues.insertOne(
+{
+  "name": "Barida Cam Kafe",
+  "address": "Süleyman Demirel Üniversitesi",
+  "rating": 5,
+  "foodanddrink": [
+    "çay",
+    "kahve",
+    "pasta"
+  ],
+  "coordinates": [
+    37.83226584629666,
+    30.524732239878013
+  ],
+  "hours": [
+    {
+      "days": "Pazartesi-Cuma",
+      "open": "9:00",
+      "close": "23:00",
+      "isClosed": false
+    },
+    {
+      "days": "Cumartesi-Pazar",
+      "open": "11:00",
+      "close": "17:00",
+      "isClosed": false
+    }
+  ]
+}
+ );
+
+
+ db.venues.updateOne({"name":"Barida Cam Kafe"},
+   {$push: {"comments": 
+     {
+       "_id": ObjectId(),
+       "author": "Sinan",
+       "rating": 5,
+       "text": "Kahveler harika",
+       "date": new Date()
+     }
+   }
+ }
+ )
+
+ db.venues.updateOne({"name":"Barida Cam Kafe"},
+   {$push: {"comments": 
+     {
+       "_id": ObjectId(),
+       "author": "Emin",
+        "rating": 4,
+        "text": "Çaylar çok güzel",
+        "date": new Date()
+      }
+    }
+  }
+  )
+
+
